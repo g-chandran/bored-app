@@ -1,35 +1,33 @@
 <script>
-  let name = "chandran";
+  import InputSection from "./components/inputSection/InputSection.svelte";
 </script>
 
-<div>
-  <p>Bored</p>
-  <p>Hello {name}</p>
-  <h1>Options</h1>
-  <h2>diy</h2>
-  <h3>Educational</h3>
-</div>
+<main>
+  <section class="input-section">
+    <div>
+      <InputSection />
+    </div>
+  </section>
+  <section class="result-section">
+    <div />
+  </section>
+</main>
 
 <style>
-  p {
-    color: var(--orange);
-    text-transform: capitalize;
-    font-size: var(--big-font);
-    font-weight: 500;
+  main {
+    display: flex;
+    flex-direction: row;
   }
 
-  h1 {
-    color: var(--black);
-    font-size: var(--med-font);
+  .input-section {
+    background: var(--white);
+    height: 100vh;
+    width: 50vw;
   }
 
-  h2 {
-    color: var(--orange);
-    font-size: var(--small-font);
-  }
-
-  h3 {
-    font-size: var(--tiny-font);
-    font-weight: normal;
+  .result-section {
+    background: var(--background-color);
+    height: 100vh;
+    width: 50vw;
   }
 </style>
