@@ -1,0 +1,17 @@
+*,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Courier New", Courier, monospace;
+}
+
+:root {
+  --orange: #ff3e00;
+  --black: #000;
+  --white: #fff;
+
+  --big-font: 45pt;
+  --med-font: 20pt;
+  --small-font: 15pt;
+  --tiny-font: 10pt;
+}
