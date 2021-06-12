@@ -1,4 +1,8 @@
-<button>Bored</button>
+<script>
+  export let handleBored;
+</script>
+
+<button on:click={handleBored}>Bored</button>
 
 <style>
   button {

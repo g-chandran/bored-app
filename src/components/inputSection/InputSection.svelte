@@ -4,12 +4,32 @@
   import BeanContainer from "./BeanContainer.svelte";
   import Options from "./Options.svelte";
 
-  let optionTitle = "options";
+  const PRICE = "price";
+  const TYPE = "type";
+  const ACCESSIBILITY = "accessibility";
+  const OPTIONS = "options";
+
+  let optionTitle = OPTIONS;
   let options = false;
+
+  let sliderValue = 0;
+  let type = "education";
+
+  const handleBored = () => {
+    if (optionTitle === OPTIONS) {
+      console.log("default");
+    } else if (optionTitle === TYPE) {
+      console.log(`${TYPE} ${type}`);
+    } else if (optionTitle === PRICE) {
+      console.log(`${PRICE} ${sliderValue}`);
+    } else if (optionTitle === ACCESSIBILITY) {
+      console.log(`${ACCESSIBILITY} ${sliderValue}`);
+    }
+  };
 </script>
 
 <div class="body">
-  <BoredButton />
+  <BoredButton {handleBored} />
   <p on:click={() => (options = !options)}>{optionTitle}</p>
   <div>
     {#if options}
@@ -22,19 +42,19 @@
     {/if}
   </div>
 
-  {#if optionTitle === "type"}
-    <BeanContainer />
-  {:else if optionTitle === "price"}
-    <Slider />
-  {:else if optionTitle === "accessibility"}
-    <Slider />
+  {#if optionTitle === TYPE}
+    <BeanContainer bind:required={type} />
+  {:else if optionTitle === PRICE}
+    <Slider bind:sliderValue />
+  {:else if optionTitle === ACCESSIBILITY}
+    <Slider bind:sliderValue />
   {/if}
 
-  {#if optionTitle !== "options"}
+  {#if optionTitle !== OPTIONS}
     <button
       on:click={() => {
         options = false;
-        optionTitle = "options";
+        optionTitle = OPTIONS;
       }}
     >
       X

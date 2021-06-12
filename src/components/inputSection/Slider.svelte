@@ -1,10 +1,10 @@
 <script>
-  let value = 0;
+  export let sliderValue = 0;
 </script>
 
 <div>
-  <input bind:value type="range" min="0" max="100" />
-  <p>{value}</p>
+  <input bind:value={sliderValue} type="range" min="0" max="100" />
+  <p>{sliderValue}</p>
 </div>
 
 <style>
