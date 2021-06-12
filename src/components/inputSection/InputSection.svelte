@@ -31,14 +31,14 @@
   {/if}
 
   {#if optionTitle !== "options"}
-    <p
+    <button
       on:click={() => {
         options = false;
         optionTitle = "options";
       }}
     >
       X
-    </p>
+    </button>
   {/if}
 </div>
 
@@ -62,6 +62,18 @@
     font-size: var(--mid-font);
     font-weight: bold;
     margin: 13px 0px 20px 0px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  button {
+    text-transform: uppercase;
+    margin: 13px 0px;
+    font-size: var(--mid-font);
+    font-weight: bold;
+    background-color: var(--white);
+    border: none;
+    border-radius: 0;
     cursor: pointer;
     user-select: none;
   }
