@@ -1,0 +1,28 @@
+<script>
+  import { createEventDispatcher } from "svelte";
+  let options = ["type", "price", "accessibility"];
+
+  const dispatch = createEventDispatcher();
+</script>
+
+<div class="options">
+  {#each options as option}
+    <div class="option">
+      <p on:click={() => dispatch("typeSelection", option)}>{option}</p>
+    </div>
+  {/each}
+</div>
+
+<style>
+  .options {
+    box-shadow: 0 0 5px var(--orange);
+  }
+
+  .option {
+    padding: 5px 15px;
+  }
+
+  .option:hover {
+    background-color: var(--background-color);
+  }
+</style>

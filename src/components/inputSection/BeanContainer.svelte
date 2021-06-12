@@ -1,22 +1,31 @@
 <script>
   import Bean from "./Bean.svelte";
 
-  const typeBeans = [
-    { status: false, type: "education" },
-    { status: false, type: "recreational" },
-    { status: false, type: "social" },
-    { status: false, type: "diy" },
-    { status: false, type: "music" },
-    { status: false, type: "charity" },
-    { status: false, type: "cooking" },
-    { status: true, type: "relaxation" },
-    { status: false, type: "busywork" },
+  let typeId = 1;
+
+  let typeBeans = [
+    { id: typeId++, status: false, type: "education" },
+    { id: typeId++, status: false, type: "recreational" },
+    { id: typeId++, status: false, type: "social" },
+    { id: typeId++, status: false, type: "diy" },
+    { id: typeId++, status: false, type: "music" },
+    { id: typeId++, status: false, type: "charity" },
+    { id: typeId++, status: false, type: "cooking" },
+    { id: typeId++, status: false, type: "relaxation" },
+    { id: typeId++, status: false, type: "busywork" },
   ];
+
+  const updateTypeBean = (typeBean) => {
+    for (let bean in typeBeans) {
+      typeBeans[bean].status = false;
+    }
+    typeBean.status = true;
+  };
 </script>
 
 <div class="type-bean-container">
   {#each typeBeans as typeBean}
-    <Bean {...typeBean} />
+    <Bean on:change={() => updateTypeBean(typeBean)} {...typeBean} />
   {/each}
 </div>
 
