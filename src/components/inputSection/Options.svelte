@@ -16,10 +16,14 @@
 <style>
   .options {
     box-shadow: 0 0 5px var(--orange);
+    position: absolute;
+    z-index: 1;
+    background-color: var(--white);
   }
 
   .option {
     padding: 5px 15px;
+    cursor: pointer;
   }
 
   .option:hover {

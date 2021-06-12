@@ -8,18 +8,20 @@
   let options = false;
 </script>
 
-<div>
+<div class="body">
   <BoredButton />
   <p on:click={() => (options = !options)}>{optionTitle}</p>
+  <div>
+    {#if options}
+      <Options
+        on:typeSelection={(option) => {
+          options = false;
+          optionTitle = option.detail;
+        }}
+      />
+    {/if}
+  </div>
 
-  {#if options}
-    <Options
-      on:typeSelection={(option) => {
-        options = false;
-        optionTitle = option.detail;
-      }}
-    />
-  {/if}
   {#if optionTitle === "type"}
     <BeanContainer />
   {:else if optionTitle === "price"}
@@ -27,10 +29,21 @@
   {:else if optionTitle === "accessibility"}
     <Slider />
   {/if}
+
+  {#if optionTitle !== "options"}
+    <p
+      on:click={() => {
+        options = false;
+        optionTitle = "options";
+      }}
+    >
+      X
+    </p>
+  {/if}
 </div>
 
 <style>
-  div {
+  .body {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -38,10 +51,18 @@
     height: 100vh;
   }
 
+  .body div {
+    display: flex;
+    justify-content: center;
+    margin-top: -20px;
+    margin-bottom: 20px;
+  }
+
   p {
     font-size: var(--mid-font);
     font-weight: bold;
     margin: 13px 0px 20px 0px;
     cursor: pointer;
+    user-select: none;
   }
 </style>
