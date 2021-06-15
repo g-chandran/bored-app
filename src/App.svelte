@@ -1,5 +1,6 @@
 <script>
   import InputSection from "./components/inputSection/InputSection.svelte";
+  import ResultSection from "./components/resultSection/ResultSection.svelte";
 </script>
 
 <main>
@@ -9,7 +10,9 @@
     </div>
   </section>
   <section class="result-section">
-    <div />
+    <div>
+      <ResultSection />
+    </div>
   </section>
 </main>
 
