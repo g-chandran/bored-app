@@ -1,11 +1,12 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { slide } from "svelte/transition";
   let options = ["type", "price", "accessibility"];
 
   const dispatch = createEventDispatcher();
 </script>
 
-<div class="options">
+<div transition:slide={{ duration: 300 }} class="options">
   {#each options as option}
     <div class="option">
       <p on:click={() => dispatch("typeSelection", option)}>{option}</p>

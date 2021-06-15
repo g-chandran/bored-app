@@ -3,6 +3,7 @@
   import Slider from "./Slider.svelte";
   import BeanContainer from "./BeanContainer.svelte";
   import Options from "./Options.svelte";
+  import { slide } from "svelte/transition";
 
   const PRICE = "price";
   const TYPE = "type";
@@ -30,7 +31,7 @@
 
 <div class="body">
   <BoredButton {handleBored} />
-  <p on:click={() => (options = !options)}>{optionTitle}</p>
+  <p transition:slide on:click={() => (options = !options)}>{optionTitle}</p>
   <div>
     {#if options}
       <Options
@@ -52,6 +53,7 @@
 
   {#if optionTitle !== OPTIONS}
     <button
+      transition:slide={{ duration: 300 }}
       on:click={() => {
         options = false;
         optionTitle = OPTIONS;

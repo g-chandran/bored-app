@@ -1,5 +1,6 @@
 <script>
   import Bean from "./Bean.svelte";
+  import { slide } from "svelte/transition";
   export let required = "education";
 
   let typeBeans = [
@@ -15,7 +16,7 @@
   ];
 </script>
 
-<div class="type-bean-container">
+<div transition:slide={{ duration: 300 }} class="type-bean-container">
   {#each typeBeans as typeBean}
     {#if typeBean === required}
       <Bean

@@ -1,8 +1,9 @@
 <script>
+  import { slide } from "svelte/transition";
   export let sliderValue = 0;
 </script>
 
-<div>
+<div transition:slide={{ duration: 300 }}>
   <input bind:value={sliderValue} type="range" min="0" max="100" />
   <p>{sliderValue}</p>
 </div>
