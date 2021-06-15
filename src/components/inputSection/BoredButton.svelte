@@ -14,4 +14,8 @@
     font-size: var(--big-font);
     cursor: pointer;
   }
+
+  button:focus {
+    box-shadow: 0px 0px 5px var(--orange);
+  }
 </style>

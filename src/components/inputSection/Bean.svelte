@@ -7,7 +7,7 @@
   const dispatch = createEventDispatcher();
 </script>
 
-<button class={status ? "selected" : ""} on:click={() => dispatch("change")}>
+<button class:selected={status} on:click={() => dispatch("change")}>
   {type}
 </button>
 
