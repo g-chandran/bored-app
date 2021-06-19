@@ -1,17 +1,33 @@
 <script>
   import InputSection from "./components/inputSection/InputSection.svelte";
   import ResultSection from "./components/resultSection/ResultSection.svelte";
+  let resultSet = [];
+  let resultId = 0;
+
+  const fetchData = (event) => {
+    console.log(event.detail);
+    let temp = {
+      id: resultId++,
+      title: "Learn Express.js",
+      type: "Education",
+      priceProgress: 20,
+      accessibilityProgress: 60,
+      link: "#",
+    };
+    console.log(temp);
+    resultSet = [temp, ...resultSet];
+  };
 </script>
 
 <main>
   <section class="input-section">
     <div>
-      <InputSection />
+      <InputSection on:fetch={fetchData} />
     </div>
   </section>
   <section class="result-section">
     <div>
-      <ResultSection />
+      <ResultSection bind:resultSet />
     </div>
   </section>
 </main>

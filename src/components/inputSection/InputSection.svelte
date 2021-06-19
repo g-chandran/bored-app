@@ -4,6 +4,17 @@
   import BeanContainer from "./BeanContainer.svelte";
   import Options from "./Options.svelte";
   import { slide } from "svelte/transition";
+  import { createEventDispatcher } from "svelte";
+
+  const dispatcher = createEventDispatcher();
+
+  const getData = () => {
+    dispatcher("fetch", {
+      option: optionTitle,
+      slider: sliderValue,
+      type: type,
+    });
+  };
 
   const PRICE = "price";
   const TYPE = "type";
@@ -12,25 +23,12 @@
 
   let optionTitle = OPTIONS;
   let options = false;
-
   let sliderValue = 0;
   let type = "education";
-
-  const handleBored = () => {
-    if (optionTitle === OPTIONS) {
-      console.log("default");
-    } else if (optionTitle === TYPE) {
-      console.log(`${TYPE} ${type}`);
-    } else if (optionTitle === PRICE) {
-      console.log(`${PRICE} ${sliderValue}`);
-    } else if (optionTitle === ACCESSIBILITY) {
-      console.log(`${ACCESSIBILITY} ${sliderValue}`);
-    }
-  };
 </script>
 
 <div class="body">
-  <BoredButton {handleBored} />
+  <BoredButton handleBored={getData} />
   <p transition:slide on:click={() => (options = !options)}>{optionTitle}</p>
   <div>
     {#if options}
