@@ -1,16 +1,34 @@
 <script>
   import InputSection from "./components/inputSection/InputSection.svelte";
   import ResultSection from "./components/resultSection/ResultSection.svelte";
+  import ErrorBox from "./components/ErrorBox.svelte";
   import { onMount } from "svelte";
   const base_URI = "http://www.boredapi.com/api/activity";
 
+  let isError = false;
+  let errorInfo = {
+    title: "Unexpected Error",
+    body: "Unexpected error occurred, please try again later",
+    hints: [],
+  };
   let resultSet = [];
   let resultId = 0;
 
   onMount(async () => {
-    let data = await getData();
-    resultSet = [data];
+    let { data, status } = await getData();
+    if (status === "OK") resultSet = [data];
+    else setError(data.title, data.description);
   });
+
+  const getErrorMessage = (title, description) => {
+    return { title: title, description: description };
+  };
+
+  const setError = (title, body) => {
+    isError = true;
+    errorInfo["title"] = title;
+    errorInfo["body"] = body;
+  };
 
   const getQuery = ({ option, slider, type }) => {
     let query = "";
@@ -32,24 +50,50 @@
   };
 
   const getData = async (query = base_URI) => {
-    const response = await fetch(query);
-    const { activity, type, price, link, accessibility } =
-      await response.json();
-    let result = {
-      id: resultId++,
-      title: activity,
-      type: type,
-      priceProgress: Math.round(price * 10),
-      accessibilityProgress: Math.round(accessibility * 10),
-      link: link,
-    };
-    return result;
+    let response;
+    try {
+      response = await fetch(query);
+    } catch (e) {
+      let errorMessage = getErrorMessage(
+        "No network",
+        "Unable to connect to the internet, please check your connection"
+      );
+      return { data: errorMessage, status: "Error" };
+    }
+    if (response.status === 200) {
+      let json = await response.json();
+      if ("error" in json) {
+        console.log(json);
+        let errorMessage = getErrorMessage(
+          "No activity found",
+          "Unable to find an activity for the given filter"
+        );
+        return { data: errorMessage, status: "Error" };
+      }
+      const { activity, type, price, link, accessibility } = json;
+      let result = {
+        id: resultId++,
+        title: activity,
+        type: type,
+        priceProgress: Math.round(price * 10),
+        accessibilityProgress: Math.round(accessibility * 10),
+        link: link,
+      };
+      return { data: result, status: "OK" };
+    } else {
+      let errorMessage = getErrorMessage(
+        "Unexpected error occurred",
+        "Unexpected error occurred, please try again later"
+      );
+      return { data: errorMessage, status: "Error" };
+    }
   };
 
   const fetchData = async (event) => {
     const query = getQuery(event.detail);
-    let data = await getData(query);
-    resultSet = [data, ...resultSet];
+    let { data, status } = await getData(query);
+    if (status === "OK") resultSet = [data, ...resultSet];
+    else setError(data.title, data.description);
   };
 </script>
 
@@ -64,6 +108,9 @@
       <ResultSection bind:resultSet />
     </div>
   </section>
+  {#if isError}
+    <ErrorBox bind:isError {...errorInfo} />
+  {/if}
 </main>
 
 <style>
