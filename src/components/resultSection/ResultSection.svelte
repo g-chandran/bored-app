@@ -1,35 +1,31 @@
 <script>
-  export let resultSet = [
-    {
-      title: "Learn Express.js",
-      type: "Education",
-      priceProgress: 20,
-      accessibilityProgress: 60,
-      link: "#",
-    },
-  ];
+  import { flip } from "svelte/animate";
+  import { fly } from "svelte/transition";
+  export let resultSet = [];
   import ResultContainer from "./ResultContainer.svelte";
 </script>
 
-<div class="result-container">
-  {#each resultSet as { title, type, priceProgress, accessibilityProgress, link }}
-    <ResultContainer
-      {title}
-      {type}
-      {priceProgress}
-      {accessibilityProgress}
-      {link}
-    />
+<div class="result-section">
+  {#each resultSet as result, i (result.id)}
+    <div animate:flip transition:fly class="result-container">
+      <ResultContainer {...result} />
+    </div>
   {:else}
     <p>Don't be bored</p>
   {/each}
 </div>
 
 <style>
-  .result-container {
+  .result-section {
     margin: 20px 10px 0 20px;
     max-height: 97vh;
     overflow-y: scroll;
+  }
+
+  .result-container {
+    padding: 20px;
+    background-color: var(--white);
+    margin-bottom: 20px;
   }
 
   ::-webkit-scrollbar {

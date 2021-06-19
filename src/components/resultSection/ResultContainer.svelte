@@ -1,4 +1,5 @@
 <script>
+  import { fly } from "svelte/transition";
   import ProgressBar from "./ProgressBar.svelte";
   export let title;
   export let type;
@@ -7,7 +8,7 @@
   export let link;
 </script>
 
-<div class="result-container">
+<div transition:fly={{ y: -300, delay: 250 }}>
   <div class="split">
     <h1>{title}</h1>
     {#if link}
@@ -34,11 +35,6 @@
     justify-content: space-between;
   }
 
-  .result-container {
-    padding: 20px;
-    background-color: var(--white);
-    margin-bottom: 20px;
-  }
   p {
     font-weight: bold;
   }

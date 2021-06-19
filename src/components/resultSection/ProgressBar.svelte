@@ -29,7 +29,7 @@
   .progress-bar p {
     text-align: center;
     position: absolute;
-    z-index: 2;
+    z-index: 1;
     margin-left: auto;
     margin-right: auto;
     left: 0;
