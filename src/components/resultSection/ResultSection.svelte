@@ -11,7 +11,7 @@
       <ResultContainer {...result} />
     </div>
   {:else}
-    <p>Don't be bored</p>
+    <p>Don't be bored, get some coffee and some activity</p>
   {/each}
 </div>
 
@@ -20,6 +20,10 @@
     margin: 20px 10px 0 20px;
     max-height: 97vh;
     overflow-y: scroll;
+  }
+
+  p {
+    text-align: center;
   }
 
   .result-container {
