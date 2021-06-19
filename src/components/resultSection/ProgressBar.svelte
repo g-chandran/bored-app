@@ -1,13 +1,13 @@
 <script>
   export let title = "price";
-  export let progress = 20;
+  export let progress = 2;
 </script>
 
 <!-- 353, 30 -->
 <div class="progress-component">
   <div class="progress-bar">
-    <p>{progress}%</p>
-    <div class="progress" style="width: {progress}%;" />
+    <p>{progress}</p>
+    <div class="progress" style="width: {progress * 10}%;" />
   </div>
   <p class="title">{title}</p>
 </div>
@@ -29,7 +29,7 @@
   .progress-bar p {
     text-align: center;
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     margin-left: auto;
     margin-right: auto;
     left: 0;

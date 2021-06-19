@@ -4,7 +4,7 @@
 </script>
 
 <div transition:slide={{ duration: 300 }}>
-  <input bind:value={sliderValue} type="range" min="0" max="100" />
+  <input bind:value={sliderValue} type="range" min="0" max="10" />
   <p>{sliderValue}</p>
 </div>
 
