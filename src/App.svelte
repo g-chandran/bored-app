@@ -3,9 +3,11 @@
   import ResultSection from "./components/resultSection/ResultSection.svelte";
   import ErrorBox from "./components/ErrorBox.svelte";
   import { onMount } from "svelte";
+  import Loader from "./components/Loader.svelte";
   const base_URI = "http://www.boredapi.com/api/activity";
 
   let isError = false;
+  let isLoading = false;
   let errorInfo = {
     title: "Unexpected Error",
     body: "Unexpected error occurred, please try again later",
@@ -90,10 +92,12 @@
   };
 
   const fetchData = async (event) => {
+    isLoading = true;
     const query = getQuery(event.detail);
     let { data, status } = await getData(query);
     if (status === "OK") resultSet = [data, ...resultSet];
     else setError(data.title, data.description);
+    isLoading = false;
   };
 </script>
 
@@ -110,6 +114,9 @@
   </section>
   {#if isError}
     <ErrorBox bind:isError {...errorInfo} />
+  {/if}
+  {#if isLoading}
+    <Loader />
   {/if}
 </main>
 
