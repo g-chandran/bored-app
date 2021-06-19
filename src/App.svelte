@@ -1,21 +1,55 @@
 <script>
   import InputSection from "./components/inputSection/InputSection.svelte";
   import ResultSection from "./components/resultSection/ResultSection.svelte";
+  import { onMount } from "svelte";
+  const base_URI = "http://www.boredapi.com/api/activity";
+
   let resultSet = [];
   let resultId = 0;
 
-  const fetchData = (event) => {
-    console.log(event.detail);
-    let temp = {
+  onMount(async () => {
+    let data = await getData();
+    resultSet = [data];
+  });
+
+  const getQuery = ({ option, slider, type }) => {
+    let query = "";
+    switch (option) {
+      case "type":
+        query = `${base_URI}?type=${type}`;
+        break;
+      case "price":
+        query = `${base_URI}?price=${slider / 10}`;
+        break;
+      case "accessibility":
+        query = `${base_URI}?accessibility=${slider / 10}`;
+        break;
+      default:
+        query = `${base_URI}/`;
+        break;
+    }
+    return query;
+  };
+
+  const getData = async (query = base_URI) => {
+    const response = await fetch(query);
+    const { activity, type, price, link, accessibility } =
+      await response.json();
+    let result = {
       id: resultId++,
-      title: "Learn Express.js",
-      type: "Education",
-      priceProgress: 20,
-      accessibilityProgress: 60,
-      link: "#",
+      title: activity,
+      type: type,
+      priceProgress: Math.round(price * 10),
+      accessibilityProgress: Math.round(accessibility * 10),
+      link: link,
     };
-    console.log(temp);
-    resultSet = [temp, ...resultSet];
+    return result;
+  };
+
+  const fetchData = async (event) => {
+    const query = getQuery(event.detail);
+    let data = await getData(query);
+    resultSet = [data, ...resultSet];
   };
 </script>
 

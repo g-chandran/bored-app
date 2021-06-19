@@ -6,13 +6,14 @@
   export let priceProgress;
   export let accessibilityProgress;
   export let link;
+  export let id;
 </script>
 
 <div transition:fly={{ y: -300, delay: 250 }}>
   <div class="split">
     <h1>{title}</h1>
     {#if link}
-      <a href={link}>
+      <a href={link} target="blank">
         <i class="material-icons">import_export</i>
       </a>
     {/if}
