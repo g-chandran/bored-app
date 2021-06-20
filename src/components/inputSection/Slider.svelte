@@ -33,6 +33,14 @@
     background-color: var(--black);
   }
 
+  input::-moz-range-thumb {
+    -webkit-appearance: none;
+    height: 41px;
+    width: 9px;
+    background-color: var(--black);
+    border: none;
+    border-radius: 0%;
+  }
   p {
     margin-top: 20px;
     font-size: var(--mid-font);
