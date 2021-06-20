@@ -7,7 +7,11 @@
 
 <div class="container" transition:fade>
   <div transition:fly>
-    <p class="close-button" on:click={() => (isError = !isError)}>X</p>
+    <section>
+      <p class="close-button" on:click={() => (isError = !isError)}>X</p>
+      <p />
+    </section>
+    <img src="./assets/set_preferences.png" alt="Change your preferences" />
     <h1>{title}</h1>
     <p class="body">{body}</p>
   </div>
@@ -22,25 +26,45 @@
     justify-content: center;
     height: 100%;
     width: 100%;
+    z-index: 2;
+  }
+
+  img {
+    width: 10rem;
+    height: 7rem;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+  }
+
+  section {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
   }
 
   .container div {
     height: fit-content;
     max-width: 30rem;
     background-color: var(--background-color);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     border-radius: 5px;
     box-shadow: 0 0 5px var(--orange);
+    padding: 2rem;
+  }
+
+  h1 {
+    text-align: center;
   }
 
   .close-button {
-    display: inline-block;
     font-weight: bold;
     cursor: pointer;
-    padding: 10px 15px;
   }
 
-  h1,
-  .body {
-    padding: 5px 15px;
+  * {
+    margin-bottom: 0.5rem;
   }
 </style>

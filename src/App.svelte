@@ -1,7 +1,7 @@
 <script>
   import InputSection from "./components/inputSection/InputSection.svelte";
   import ResultSection from "./components/resultSection/ResultSection.svelte";
-  import ErrorBox from "./components/ErrorBox.svelte";
+  import ErrorCard from "./components/ErrorCard.svelte";
   import { onMount } from "svelte";
   import Loader from "./components/Loader.svelte";
   const base_URI = "http://www.boredapi.com/api/activity";
@@ -9,7 +9,7 @@
   let isError = false;
   let isLoading = false;
   let errorInfo = {
-    title: "Unexpected Error",
+    title: "Take a nap",
     body: "Unexpected error occurred, please try again later",
     hints: [],
   };
@@ -57,7 +57,7 @@
       response = await fetch(query);
     } catch (e) {
       let errorMessage = getErrorMessage(
-        "No network",
+        "You are in a Island",
         "Unable to connect to the internet, please check your connection"
       );
       return { data: errorMessage, status: "Error" };
@@ -67,8 +67,8 @@
       if ("error" in json) {
         console.log(json);
         let errorMessage = getErrorMessage(
-          "No activity found",
-          "Unable to find an activity for the given filter"
+          "You must be unique, but boredom is common",
+          "Unable to find an activity for the given option, try changing the options"
         );
         return { data: errorMessage, status: "Error" };
       }
@@ -84,7 +84,7 @@
       return { data: result, status: "OK" };
     } else {
       let errorMessage = getErrorMessage(
-        "Unexpected error occurred",
+        "Take a nap",
         "Unexpected error occurred, please try again later"
       );
       return { data: errorMessage, status: "Error" };
@@ -113,7 +113,7 @@
     </div>
   </section>
   {#if isError}
-    <ErrorBox bind:isError {...errorInfo} />
+    <ErrorCard bind:isError {...errorInfo} />
   {/if}
   {#if isLoading}
     <Loader />
