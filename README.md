@@ -11,13 +11,13 @@ The API from bored-api is used as the backend for the appication, all the option
 1. Clone the repository
 
 ```
-git clone # url will be added soon
+git clone https://github.com/g-chandran/bored-app.git
 ```
 
 2. Move to the folder and install the dependencies
 
 ```
-cd # repository name will be added soon
+cd bored-app
 npm i
 ```
 
