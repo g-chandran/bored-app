@@ -2,18 +2,7 @@
   import Bean from "./Bean.svelte";
   import { slide } from "svelte/transition";
   export let required = "education";
-
-  let typeBeans = [
-    "education",
-    "recreational",
-    "social",
-    "diy",
-    "music",
-    "charity",
-    "cooking",
-    "relaxation",
-    "busywork",
-  ];
+  import { typeBeans } from "./../../stores/r-store";
 </script>
 
 <div transition:slide={{ duration: 300 }} class="type-bean-container">

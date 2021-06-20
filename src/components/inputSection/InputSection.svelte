@@ -5,6 +5,7 @@
   import Options from "./Options.svelte";
   import { slide } from "svelte/transition";
   import { createEventDispatcher } from "svelte";
+  import { PRICE, TYPE, ACCESSIBILITY, OPTIONS } from "./../../stores/r-store";
 
   const dispatcher = createEventDispatcher();
 
@@ -15,11 +16,6 @@
       type: type,
     });
   };
-
-  const PRICE = "price";
-  const TYPE = "type";
-  const ACCESSIBILITY = "accessibility";
-  const OPTIONS = "options";
 
   let optionTitle = OPTIONS;
   let options = false;

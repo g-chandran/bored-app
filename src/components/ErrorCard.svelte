@@ -1,14 +1,14 @@
 <script>
   import { fade, fly } from "svelte/transition";
+  import { isError } from "./../stores/w-store";
   export let title = "Unable to connect";
   export let body = "Unable to connect to the network, please try again later.";
-  export let isError;
 </script>
 
 <div class="container" transition:fade>
   <div transition:fly>
     <section>
-      <p class="close-button" on:click={() => (isError = !isError)}>X</p>
+      <p class="close-button" on:click={() => isError.set(false)}>X</p>
       <p />
     </section>
     <img src="./assets/set_preferences.png" alt="Change your preferences" />
